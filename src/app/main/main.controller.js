@@ -32,7 +32,17 @@
                 return true;
             }
             routeService.push(vm.newPoint);
+            routeService.build();
             vm.newPoint = routeService.getPoint();
-        }
+        };
+
+        /**
+         * Удаляет точку из списка.
+         * @param point
+         */
+        vm.remove = function(point) {
+            routeService.remove(point);
+            routeService.build();
+        };
     }
 })();

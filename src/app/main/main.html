@@ -8,9 +8,16 @@
                    placeholder="Точка {{main.points.length+1}}"
                    type="text"/>
         </div>
-        <ul class="list-unstyled">
-            <li ng-repeat="point in main.points">
-                {{point}}
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="point in main.points">
+                <span class="row">
+                    <span class="col-xs-10" ng-bind="point.title"></span>
+                    <span class="col-xs-2">
+                        <button class="btn btn-xs" ng-click="main.remove(point)">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </span>
+                </span>
             </li>
         </ul>
         <div ng-if="!main.points.length">

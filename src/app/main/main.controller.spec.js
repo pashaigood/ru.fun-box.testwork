@@ -9,15 +9,15 @@
             vm = _$controller_('MainController');
         }));
 
-        it("shouldn't add point with out title", function () {
+        it("shouldn't add point without title.", function () {
             var point = vm.newPoint;
             vm.newPoint.title = '';
             vm.add();
-            expect(vm.points.indexOf(vm.newPoint)).toBe(-1);
+            expect(vm.points).not.toContain(vm.newPoint);
             expect(vm.newPoint).toBe(point);
         });
 
-        it('points should be a array', function() {
+        it('points should be a array.', function() {
             expect(vm.points).toEqual(jasmine.any(Array));
         });
 
@@ -36,5 +36,18 @@
             expect(vm.newPoint).not.toBe(point);
             expect(point).toBe(vm.points[length]);
         });
+        
+        it("remove point. After that, point's list should be shorter and don't contain removed point.", function () {
+            // Найдём случайную точку.
+            var length = vm.points.length,
+                point = vm.points[Math.floor(Math.random() * length)];
+
+            expect(point).toBeDefined();
+            // Удалим её из списка точек.
+            vm.remove(point);
+            // Ожидаем, что её больше нет в списке.
+            expect(vm.points).not.toContain(point);
+            expect(vm.points.length).toBe(length - 1);
+        })
     });
 })();
