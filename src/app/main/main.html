@@ -1,0 +1,20 @@
+<div class="main row">
+
+    <div class="col-xs-4">
+        <div class="form-group">
+            <input ng-model="main.newPoint.title"
+                   ng-keypress="main.add($event)"
+                   class="form-control"
+                   placeholder="Точка {{main.points.length+1}}"
+                   type="text"/>
+        </div>
+        <ul class="list-unstyled">
+            <li ng-repeat="point in main.points">
+                {{point}}
+            </li>
+        </ul>
+        <div ng-if="!main.points.length">
+            <h4 class="text-center">Список точек пуст</h4>
+        </div>
+    </div>
+</div>
