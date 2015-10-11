@@ -22,7 +22,7 @@
 
         // TODO: Описать перестройку маршрута.
         route.build = function() {
-
+            console.log('time to build');
         };
 
         /**
@@ -41,11 +41,21 @@
         route.getPoint = getPoint;
 
         /**
+         * Добавляет точку в маршрут.
+         * @param point
+         */
+        route.add = function (point) {
+            route.push(point);
+            route.build();
+        };
+
+        /**
          * Удаляет точку из маршрута.
          * @param point
          */
         route.remove = function(point) {
             _.remove(route, point);
+            route.build();
         };
 
         return route;

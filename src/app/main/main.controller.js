@@ -27,12 +27,11 @@
          * @param {Object} [$event] Объект нажатия клавиши.
          * @param {Number} $event.which
          */
-        vm.add = function($event) {
-            if (! vm.newPoint.title || $event && $event.which != 13) {
+        vm.add = function ($event) {
+            if (!vm.newPoint.title || $event && $event.which != 13) {
                 return true;
             }
-            routeService.push(vm.newPoint);
-            routeService.build();
+            routeService.add(vm.newPoint);
             vm.newPoint = routeService.getPoint();
         };
 
@@ -40,9 +39,24 @@
          * Удаляет точку из списка.
          * @param point
          */
-        vm.remove = function(point) {
+        vm.remove = function (point) {
             routeService.remove(point);
-            routeService.build();
+        };
+
+        vm.sortableOptions = {
+            containment: '#point-list',
+            orderChanged: function() {
+                routeService.build();
+            }
+            /*accept: function (sourceItemHandleScope, destSortableScope) {
+                return true;
+            },//override to determine drag is allowed or not. default is true.
+            itemMoved: function (event) {
+            },//Do what you want
+            orderChanged: function (event) {
+            },//Do what you want
+            containment: '#board',//optional param.
+            clone: true //optional param for clone feature.*/
         };
     }
 })();
