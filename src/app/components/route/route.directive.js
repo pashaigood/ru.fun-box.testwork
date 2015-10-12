@@ -19,20 +19,20 @@
 
         /**
          * @ngInject
-         * @param routeService
+         * @param pointsService
          * @constructor
          */
-        function RouteController(routeService) {
+        function RouteController(pointsService) {
             var vm = this;
 
-            vm.points = routeService;
+            vm.points = pointsService;
             /**
              * Обрабатывает событие изменения центра карты.
              * @method
              * @param $event
              */
             vm.onChangeCenter = function($event) {
-                routeService.center = $event.get('newCenter');
+                pointsService.center = $event.get('newCenter');
             };
 
             /**
@@ -43,7 +43,7 @@
              */
             vm.onDrag = function ($event, point) {
                 point.geometry.coordinates = $event.get('target').geometry.getCoordinates();
-                routeService.build();
+                pointsService.build();
             };
 
             /**

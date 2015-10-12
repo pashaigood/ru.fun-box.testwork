@@ -24,12 +24,8 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
-<div class="row full-height">
-    <div class="col-xs-4 col-md-2 full-height">
-        <div ng-controller="MainController as main"
-             ng-include="'app/main/main.html'"
-             class="main full-height"></div>
-    </div>
+<div class="row full-height" ng-controller="MainController as main">
+    <points class="col-xs-4 col-md-2 full-height"></points>
     <route class="col-xs-8 col-md-10"></route>
 </div>
 

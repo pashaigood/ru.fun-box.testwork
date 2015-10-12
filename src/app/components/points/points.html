@@ -1,28 +1,28 @@
 <div class="form-group">
-    <input ng-model="main.newPoint.title"
-           ng-keypress="main.add($event)"
+    <input ng-model="points.newPoint.title"
+           ng-keypress="points.add($event)"
            class="form-control"
-           placeholder="Точка {{main.points.length+1}}"
+           placeholder="Точка {{points.items.length+1}}"
            type="text"/>
 </div>
 <ul id="point-list"
     class="list-group no-select"
-    as-sortable="main.sortableOptions"
-    ng-model="main.points">
+    as-sortable="points.sortableOptions"
+    ng-model="points.items">
     <li as-sortable-item=""
-        ng-repeat="point in main.points"
+        ng-repeat="point in points.items"
         class="list-group-item">
             <span as-sortable-item-handle=""
                   class="row">
                 <span class="col-xs-10" ng-bind="point.title"></span>
                 <span class="col-xs-2 text-right">
-                    <button class="btn btn-xs" ng-click="main.remove(point)">
+                    <button class="btn btn-xs" ng-click="points.remove(point)">
                         <i class="glyphicon glyphicon-remove"></i>
                     </button>
                 </span>
             </span>
     </li>
 </ul>
-<div ng-if="!main.points.length">
+<div ng-if="!points.items.length">
     <h4 class="text-center">Список точек пуст</h4>
 </div>

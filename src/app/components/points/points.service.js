@@ -3,7 +3,7 @@
 
     angular
         .module('ruFunBoxTestwork')
-        .service('routeService', routeService);
+        .service('pointsService', pointsService);
 
     /**
      * Сервис отвечает за управление маршрутом.
@@ -14,7 +14,7 @@
      * TODO: Изменить на фабрику, и создать в MainController экземпляр, которым и буду пользоваться компонентом.
      * TODO: Изменить название с route на points
      */
-    function routeService(_) {
+    function pointsService(_) {
         var route = [];
 
         /**
