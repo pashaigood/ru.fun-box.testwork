@@ -2,6 +2,11 @@
  *  If you want to override some bootstrap variables, you have to change values here.
  *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
  */
+$container-sm: 100%;
+$container-md: $container-sm;
+$container-lg: $container-sm;
+
+$grid-gutter-width: 0;
 $navbar-inverse-link-color: #5AADBB;
 $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
@@ -12,8 +17,16 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 // bower:scss
 // endbower
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
 body {
   background: url('http://supernovathemes.com/wp-content/themes/supernonvathemes/images/bg/b8.png');
+}
+
+.full-height {
+  height: 100%;
 }
 
 .row {

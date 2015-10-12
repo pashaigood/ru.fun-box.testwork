@@ -1,0 +1,8 @@
+<ya-map ya-zoom="15" ya-center="{{route.points.center}}"
+        ya-controls="searchControl">
+    <ya-geo-object ng-repeat="point in route.points"
+                   ya-source="point"
+                   ya-event-geometrychange="route.drag($event, point)"
+                   ya-event-balloonopen="route.open($event, point)"
+                   ya-options="{{route.setting}}"></ya-geo-object>
+</ya-map>

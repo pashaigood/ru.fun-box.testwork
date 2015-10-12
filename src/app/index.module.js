@@ -3,7 +3,8 @@
 
   angular
     .module('ruFunBoxTestwork', [
-          'as.sortable'
+          'as.sortable',
+          'yaMap'
       ]);
 
 })();

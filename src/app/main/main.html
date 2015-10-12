@@ -1,32 +1,28 @@
-<div class="main row">
-    <div class="col-xs-4">
-        <div class="form-group">
-            <input ng-model="main.newPoint.title"
-                   ng-keypress="main.add($event)"
-                   class="form-control"
-                   placeholder="Точка {{main.points.length+1}}"
-                   type="text"/>
-        </div>
-        <ul id="point-list"
-            class="list-group no-select"
-            as-sortable="main.sortableOptions"
-            ng-model="main.points">
-            <li as-sortable-item=""
-                ng-repeat="point in main.points"
-                class="list-group-item">
-                <span as-sortable-item-handle=""
-                      class="row">
-                    <span class="col-xs-10" ng-bind="point.title"></span>
-                    <span class="col-xs-2">
-                        <button class="btn btn-xs" ng-click="main.remove(point)">
-                            <i class="glyphicon glyphicon-remove"></i>
-                        </button>
-                    </span>
+<div class="form-group">
+    <input ng-model="main.newPoint.title"
+           ng-keypress="main.add($event)"
+           class="form-control"
+           placeholder="Точка {{main.points.length+1}}"
+           type="text"/>
+</div>
+<ul id="point-list"
+    class="list-group no-select"
+    as-sortable="main.sortableOptions"
+    ng-model="main.points">
+    <li as-sortable-item=""
+        ng-repeat="point in main.points"
+        class="list-group-item">
+            <span as-sortable-item-handle=""
+                  class="row">
+                <span class="col-xs-10" ng-bind="point.title"></span>
+                <span class="col-xs-2 text-right">
+                    <button class="btn btn-xs" ng-click="main.remove(point)">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </button>
                 </span>
-            </li>
-        </ul>
-        <div ng-if="!main.points.length">
-            <h4 class="text-center">Список точек пуст</h4>
-        </div>
-    </div>
+            </span>
+    </li>
+</ul>
+<div ng-if="!main.points.length">
+    <h4 class="text-center">Список точек пуст</h4>
 </div>
