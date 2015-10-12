@@ -1,8 +1,10 @@
 <ya-map ya-zoom="15" ya-center="{{route.points.center}}"
+        ya-event-boundschange="route.onChangeCenter($event)"
         ya-controls="searchControl">
+    <ya-geo-object ya-source="route.points.lines" ya-options="{balloonHasCloseButton:false,strokeColor:'#000000',strokeWidth:4,strokeOpacity:0.5}"></ya-geo-object>
     <ya-geo-object ng-repeat="point in route.points"
                    ya-source="point"
-                   ya-event-geometrychange="route.drag($event, point)"
-                   ya-event-balloonopen="route.open($event, point)"
-                   ya-options="{{route.setting}}"></ya-geo-object>
+                   ya-event-geometrychange="route.onDrag($event, point)"
+                   ya-event-balloonopen="route.onShowBalloon($event, point)"
+                   ya-options="{{route.pointSetting}}"></ya-geo-object>
 </ya-map>

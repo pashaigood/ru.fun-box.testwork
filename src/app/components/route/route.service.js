@@ -11,19 +11,33 @@
      * @constructor
      * @param _
      * @returns {Array}
+     * TODO: Изменить на фабрику, и создать в MainController экземпляр, которым и буду пользоваться компонентом.
+     * TODO: Изменить название с route на points
      */
     function routeService(_) {
-        var route = [
-            getPoint({title: 'Точка 1', geometry: {coordinates: [37.6315456771846,55.75716869581239]}}),
-            getPoint({title: 'Точка 2', geometry: {coordinates: [37.63520507812404,55.753752974261566]}}),
-            getPoint({title: 'Точка 3', geometry: {coordinates: [37.633488464354116,55.753486748594234]}}),
-        ];
+        var route = [];
 
-        route.center = [37.63261856079043,55.75561986082598];
+        /**
+         * Текущий центр маршрута.
+         * @type {number[]}
+         */
+        route.center = [37.63261856079043, 55.75561986082598];
 
-        // TODO: Описать перестройку маршрута.
+        // TODO: Изменить название с lines на route
+        route.lines = {
+            geometry: {
+                type: 'LineString',
+                coordinates: []
+            }
+        };
+
+        /**
+         * Метод перестраивает маршрут между точками.
+         */
         route.build = function() {
-            console.log('time to build');
+            route.lines.geometry.coordinates = _.map(route, function(point) {
+                return point.geometry.coordinates;
+            });
         };
 
         /**
@@ -36,8 +50,7 @@
 
             return _.defaultsDeep(data, {
                 geometry: {
-                    type: "Point",
-                    coordinates: [37.8, 55.8]
+                    type: "Point"
                 }
             });
         }
@@ -48,6 +61,7 @@
          * @param point
          */
         route.add = function (point) {
+            point.geometry.coordinates = point.geometry.coordinates || _.clone(route.center);
             route.push(point);
             route.build();
         };

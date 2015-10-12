@@ -17,15 +17,42 @@
 
         return directive;
 
-        /** @ngInject */
+        /**
+         * @ngInject
+         * @param routeService
+         * @constructor
+         */
         function RouteController(routeService) {
             var vm = this;
 
             vm.points = routeService;
-            vm.drag = function ($event, point) {
-                console.log(1)
+            /**
+             * Обрабатывает событие изменения центра карты.
+             * @method
+             * @param $event
+             */
+            vm.onChangeCenter = function($event) {
+                routeService.center = $event.get('newCenter');
             };
-            vm.open = function ($event, point) {
+
+            /**
+             * Обрабатывает событие перетаскивания точки на карте.
+             * @method
+             * @param $event
+             * @param point
+             */
+            vm.onDrag = function ($event, point) {
+                point.geometry.coordinates = $event.get('target').geometry.getCoordinates();
+                routeService.build();
+            };
+
+            /**
+             * Обрабатывает событие отображения балуна на карте.
+             * @method
+             * @param $event
+             * @param point
+             */
+            vm.onShowBalloon = function ($event, point) {
                 var geoObject = $event.get('target');
                 geoObject.properties
                     .set({
@@ -33,7 +60,12 @@
                         balloonContentBody: geoObject.geometry.getCoordinates()
                     });
             };
-            vm.setting = {
+
+            /**
+             * Настройки точки на карте.
+             * @type {{draggable: boolean, preset: string, iconColor: string, openEmptyBalloon: boolean}}
+             */
+            vm.pointSetting = {
                 draggable: true,
                 preset: 'islands#circleIcon',
                 iconColor: '#3caa3c',
