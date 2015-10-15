@@ -50,6 +50,7 @@
          */
         self.add = function (point) {
             point.coords(point.coords() || _.clone(self.center));
+            point.updateAddress();
             self.push(point);
             self.build();
         };

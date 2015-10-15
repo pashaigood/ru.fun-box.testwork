@@ -60,6 +60,16 @@
             }
         };
 
+        /**
+         * Обновляем адрес на метке.
+         * @param point
+         */
+        vm.updateAddress = function(point) {
+            if (point) {
+                point.updateAddress();
+            }
+        };
+
 
         /**
          * Настройки точки на карте.

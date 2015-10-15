@@ -12,7 +12,7 @@
 
         it("shouldn't add point without title.", function () {
             var point = vm.newPoint;
-            vm.newPoint.title = '';
+            vm.newPoint.title('');
             vm.add();
             expect(vm.items).not.toContain(vm.newPoint);
             expect(vm.newPoint).toBe(point);
@@ -26,7 +26,7 @@
             var point = vm.newPoint,
                 length = vm.items.length;
 
-            point.title = 'New point';
+            point.title('New point');
             // Добавим новую точку.
             vm.add();
             // Убедимся, что количесто точек увеличелось.

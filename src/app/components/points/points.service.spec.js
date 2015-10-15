@@ -3,12 +3,14 @@
     'use strict';
 
     describe('Point', function () {
-        var pointsService;
+        var pointsService,
+            $httpBackend;
 
         beforeEach(module('ruFunBoxTestwork'));
-        beforeEach(inject(function (_$controller_, _pointsService_) {
-            _$controller_('MainController')
+        beforeEach(inject(function (_$controller_, _pointsService_, _$httpBackend_) {
+            _$controller_('MainController');
             pointsService = _pointsService_;
+            $httpBackend = _$httpBackend_;
         }));
 
         it('should create correctly', function () {
@@ -39,6 +41,38 @@
 
             expect(point.properties.balloonContentHeader).toBe(point.title());
             expect(point.geometry.coordinates).toEqual(coolds);
+        });
+
+        it('should contain address.', function() {
+
+            $httpBackend.resetExpectations();
+
+            $httpBackend.whenGET(/.*\/1.x\/.*/)
+                .respond({
+                    "response": {
+                        "GeoObjectCollection": {
+                            "featureMember": [{
+                                "GeoObject": {
+                                    "description": "Москва, Россия",
+                                    "name": "Солянский проезд, 1",
+                                    "boundedBy": {
+                                        "Envelope": {
+                                            "lowerCorner": "37.627481 55.749446",
+                                            "upperCorner": "37.643938 55.758726"
+                                        }
+                                    }
+                                }
+                            }]
+                        }
+
+                    }
+                });
+            var point = pointsService.getPoint();
+
+            point.coords([ 37.635709, 55.754086]);
+            point.updateAddress();
+            $httpBackend.flush();
+            expect(point.properties.balloonContentBody).toBe('Солянский проезд, 1');
         });
 
         it('\'s lines should be rebuild.', function () {
