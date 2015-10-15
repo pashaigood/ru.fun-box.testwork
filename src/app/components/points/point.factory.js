@@ -44,7 +44,7 @@
             title: function(value) {
                 // Правило, если this не чаще 3 раз
                 // или не используеться в другом контексте, не заменяю на self.
-                return value ?
+                return value !== void 0 ?
                     (this.properties.balloonContentHeader = value)
                     : this.properties.balloonContentHeader;
             },
@@ -55,7 +55,7 @@
              */
             coords: function(value) {
                 var self = this;
-                if (value) {
+                if (value !== void 0) {
                     self.geometry.coordinates = value;
                     self.properties.balloonContentBody = self.toCoords();
                     return value;
