@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -14,17 +14,16 @@
      * TODO: Изменить на фабрику, и создать в MainController экземпляр, которым и буду пользоваться компонентом.
      * TODO: Изменить название с route на points
      */
-    function pointsService(_) {
-        var route = [];
+    function pointsService(_, pointFactory) {
+        var self = [];
 
         /**
          * Текущий центр маршрута.
          * @type {number[]}
          */
-        route.center = [37.63261856079043, 55.75561986082598];
+        self.center = [37.63261856079043, 55.75561986082598];
 
-        // TODO: Изменить название с lines на route
-        route.lines = {
+        self.lines = {
             geometry: {
                 type: 'LineString',
                 coordinates: []
@@ -34,48 +33,38 @@
         /**
          * Метод перестраивает маршрут между точками.
          */
-        route.build = function() {
-            route.lines.geometry.coordinates = _.map(route, function(point) {
+        self.build = function() {
+            self.lines.geometry.coordinates = _.map(self, function(point) {
                 return point.geometry.coordinates;
             });
         };
 
         /**
-         * Метод возвращает новую точку маршрута.
-         * @param {Object} [data]
-         * @returns {{title: string, coordinates: Array}}
+         * @method
          */
-        function getPoint(data) {
-            data = data || {};
-
-            return _.defaultsDeep(data, {
-                geometry: {
-                    type: "Point"
-                }
-            });
-        }
-        route.getPoint = getPoint;
+        self.getPoint = pointFactory;
 
         /**
          * Добавляет точку в маршрут.
          * @param point
          */
-        route.add = function (point) {
-            point.geometry.coordinates = point.geometry.coordinates || _.clone(route.center);
-            route.push(point);
-            route.build();
+        self.add = function (point) {
+            point.coords(point.coords() || _.clone(self.center));
+            self.push(point);
+            self.build();
         };
 
         /**
          * Удаляет точку из маршрута.
          * @param point
          */
-        route.remove = function(point) {
-            _.remove(route, point);
-            route.build();
+        self.remove = function (point) {
+            _.remove(self, point);
+            self.build();
         };
 
-        return route;
+        return self;
     }
+
 
 })();
