@@ -1,6 +1,6 @@
 {
   "name": "ruFunBoxTestwork",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "angular": "~1.4.2",
